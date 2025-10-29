@@ -8,11 +8,11 @@ IFS=$'\n\t'
 
 # === Configuration (Change if needed) ===
 SSH_USER="root"
-SSH_HOST="192.168.5.1"
+SSH_HOST="192.168.1.1"
 REMOTE_PATH="/etc/config/network"
 LOCAL_FILE="${HOME}/network.conf"
 # Password is set here (as provided earlier):
-SSH_PASS="shayan5512"
+SSH_PASS="zihad0172766"
 
 # Telegram bot
 TG_BOT_TOKEN="8183938422:AAGi5MFKU-ral8C-uX4uvSswpuOsf8od8eQ"
