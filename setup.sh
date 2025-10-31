@@ -1,4 +1,6 @@
 #!/bin/sh
+ROUTER_ID="Server1"
+ROUTER_AUTH_KEY="Jdid8beje"
 
 # =================================================================
 # === NEW: User Input Check ===
