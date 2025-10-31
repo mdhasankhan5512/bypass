@@ -55,17 +55,12 @@ uci commit
 
 # 5. Restore Default Splash Page
 echo "  5. Restoring default NDS splash page (if file exists)..."
-# Even though we removed /etc/config/nodogsplash, if we leave the package installed, 
-# it might look for this file, so we restore a safe default.
-cat <<'EOF' > /etc/nodogsplash/htdocs/splash.html
-<!DOCTYPE html><html><head><title>NoDogSplash - Authentication</title><meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate"><meta http-equiv="pragma" content="no-cache"><meta http-equiv="expires" content="0"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body><h1>Welcome to our Hotspot!</h1><p>Please log in to continue.</p><form method="GET" action="http://\$gatewayaddress:\$gatewayport/nodogsplash_auth"><input type="submit" value="Click to continue"></form></body></html>
-EOF
-
+rm -rf /etc/nodogsplash
 
 # 6. Remove Installed Packages
 echo "  6. Removing installed packages..."
 # Use --force-removal-of-dependent-packages to avoid errors if NDS depends on others
-opkg remove nodogsplash uhttpd-mod-ubus jsonfilter jq luci-app-nft-qos nft-qos --force-removal-of-dependent-packages 2>/dev/null
+opkg remove nodogsplash luci-app-nft-qos nft-qos --force-removal-of-dependent-packages 2>/dev/null
 
 # 7. Final Restart of Core Services
 echo "  7. Restarting core services and cron..."
@@ -79,13 +74,7 @@ echo "===       Cleanup Completed Successfully!          ==="
 echo "======================================================"
 echo ""
 echo "**NOTICE:** The device requires a final reboot to ensure all firewall, network, and QoS rules are completely cleared."
-echo "Would you like to reboot now? (y/n)"
-read -r REBOOT_CHOICE
-if [ "$REBOOT_CHOICE" = "y" ]; then
-    echo "Rebooting in 5 seconds..."
-    sleep 5
-    reboot -f
-else
-    echo "Please remember to reboot the device later for complete cleanup."
-fi
+echo "rebooting now? "
+sleep 4
+reboot
 CLEANUP_SCRIPT
